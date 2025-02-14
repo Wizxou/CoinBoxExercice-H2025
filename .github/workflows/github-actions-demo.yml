@@ -23,9 +23,14 @@ jobs:
         run: |
           python -m ensurepip --default-pip
           pip install -r requirements.txt
-      - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: Run tests and coverage
-      - run: |
+        run: |
           cd ./src
           coverage run -m unittest
           coverage html
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: src/htmlcov
+      - run: echo "🍏 This job's status is ${{ job.status }}."
