@@ -24,3 +24,8 @@ jobs:
           python -m ensurepip --default-pip
           pip install -r requirements.txt
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Run tests and coverage
+      - run: |
+          cd ./src
+          coverage run -m unittest
+          coverage html
